@@ -7,6 +7,8 @@ src/deasy_puce.egg-info/dependency_links.txt
 src/deasy_puce.egg-info/entry_points.txt
 src/deasy_puce.egg-info/requires.txt
 src/deasy_puce.egg-info/top_level.txt
+src/deasy_puce/distributivo/__init__.py
+src/deasy_puce/distributivo/distributivo.py
 src/deasy_puce/informe/__init__.py
 src/deasy_puce/informe/informe.py
 src/deasy_puce/latex/__init__.py

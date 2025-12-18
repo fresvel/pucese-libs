@@ -14,6 +14,10 @@ class LatexTblr:
         self.set_caption = set_caption
 
     def from_dataframe(self,df,caption,label,h_align=None,v_align=None,scale=None):
+        
+        if df is None or df.empty:
+            return ""
+
         n_cols = df.shape[1]
 
         if h_align is None:
