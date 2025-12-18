@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "deasy-puce"
-version = "0.1.5"
+version = "0.1.6"
 description = "Librería modular para la generación de informes académicos en PUCESE"
 authors = [
     { name = "Javier Velasteguí", email = "jvelastegui@pucesm.edu.ec" }

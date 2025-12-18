@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 pyhanko = "*"
+jinja2 = "*"
 
 [dev-packages]
 build = "*"

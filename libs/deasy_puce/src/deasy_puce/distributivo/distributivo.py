@@ -7,11 +7,12 @@ from pathlib import Path
 from deasy_puce import Informe
 
 class Distributivo(Informe):
-    def __init__(self, periodo, data_path, profesors_path):
-        super().__init__(periodo)
+    def __init__(self, periodo, data_path):
+        self.__titulo='DISTRIBUTIVO ACADÉMICO Y DE GESTIÓN'
+        super().__init__(periodo, self.__titulo)
         self.data_path=data_path
-        self.profesors_path=profesors_path
         self.save_path='../Latex/Contenido/'
+        
 
     def load_data(self):
         self.dataframe = pd.read_excel(self.data_path)
@@ -66,6 +67,8 @@ class Distributivo(Informe):
         content_file = tables_dir / ".."/"Content.tex"
         with open(content_file,"w", encoding="utf-8") as f:
                 f.write(content)
+        
+        self.render_header_tex(self.carrera)
 
 
     def build_content(self):

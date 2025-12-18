@@ -1,16 +1,36 @@
 import pandas as pd
+from jinja2 import Template
+from pathlib import Path
+
 from deasy_puce.latex.tblr import LatexTblr
 
 class Informe():
-    def __init__(self, periodo, base=2):
+
+    _CICLOS_I = {61, 12}
+    _CICLOS_II = {66, 16}
+
+    def __init__(self, periodo, titulo="TITULO", base=2):
         self.__periodo=periodo
+        self.__titulo=titulo
         self.__anio=int(periodo[:4])
         self.__ciclo=int(periodo[4:])
         self.__base=base
         self.obtener_periodos()
-        self.version="Informe 0.1.5"
-        
+        self.__set_beauty_period()
+        self.version="Informe 0.1.6"
+        self.template_header="../Latex/Contenido/Header.tex.j2"
+        self.output_header="../Latex/Contenido/Header.tex"
 
+    def __set_beauty_period(self):
+        if self.__ciclo in self._CICLOS_I:
+            sufijo = "-I"
+        elif self.__ciclo in self._CICLOS_II:
+            sufijo = "-II"
+        else:
+            raise ValueError(f"Ciclo inválido: {self.__ciclo}")
+
+        self.__beauty_period = f"{self.__anio}{sufijo}"
+    
     def obtener_periodos(self):
         keep_anio_previo=["66","16"]
         map_ciclo_previo={
@@ -62,4 +82,15 @@ class Informe():
             v_align=v_align,
             scale=scale
         )
+    
+    def render_header_tex(self, carrera):
+        template_text = Path(self.template_header).read_text(encoding="utf-8")
+        template = Template(template_text)
+
+        rendered = template.render(
+            carrera=carrera,
+            periodo=self.__beauty_period,
+            titulo=self.__titulo
+        )
+        Path(self.output_header).write_text(rendered, encoding="utf-8")
 
