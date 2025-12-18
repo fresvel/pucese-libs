@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "deasy-puce"
+version = "0.1.5"
+description = "Librería modular para la generación de informes académicos en PUCESE"
+authors = [
+    { name = "Javier Velasteguí", email = "jvelastegui@pucesm.edu.ec" }
+]
+license = { text = "MIT" }
+requires-python = ">=3.9"
+
+dependencies = [
+    "pandas",
+    "jinja2",
+    "matplotlib"
+]
+
+[project.scripts]
+deasypuce = "deasy_puce.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["deasy_puce*"]
+
+[tool.setuptools.package-dir]
+"" = "src"

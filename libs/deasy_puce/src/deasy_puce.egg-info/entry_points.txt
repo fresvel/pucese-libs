@@ -1,0 +1,2 @@
+[console_scripts]
+deasypuce = deasy_puce.__main__:main

@@ -1,0 +1,1 @@
+from .informe.informe import Informe

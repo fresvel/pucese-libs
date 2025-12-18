@@ -1,0 +1,1 @@
+from .tblr import LatexTblr
