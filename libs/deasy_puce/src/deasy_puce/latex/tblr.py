@@ -6,12 +6,16 @@ class LatexTblr:
         width="\\textwidth",
         font_size="\\footnotesize",
         header_color="colhead!40",
-        set_caption="default"
+        set_caption="default",
+        options='',
+        props=''
     ):
         self.width = width
         self.font_size = font_size
         self.header_color = header_color
         self.set_caption = set_caption
+        self.options=options
+        self.props=props
 
     def from_dataframe(self,df,caption,label,h_align=None,v_align=None,scale=None):
         
@@ -67,9 +71,10 @@ class LatexTblr:
         return rf"""
         {caption_tpl}\begin{{longtblr}}[
         caption={{{caption}}},
-        label={{tab:{label}}}
+        label={{tab:{label}}}, {self.options}
         ]{{ 
         colspec={{{colspec}}},
+        {self.props},
         row{{1-Z}} = {{font={self.font_size}}},
         row{{1}} = {{bg={self.header_color}, font={self.font_size}\bfseries}},
         hlines,
@@ -81,3 +86,6 @@ class LatexTblr:
         {body}
         \end{{longtblr}}
         """.strip()
+
+
+    

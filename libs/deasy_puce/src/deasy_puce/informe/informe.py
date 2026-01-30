@@ -12,24 +12,39 @@ class Informe():
     def __init__(self, periodo, titulo="TITULO", base=2):
         self.__periodo=periodo
         self.__titulo=titulo
-        self.__anio=int(periodo[:4])
+        self._anio=int(periodo[:4])
         self.__ciclo=int(periodo[4:])
         self.__base=base
+        self._roman_period, self._months_period, self._letter_period, self._number_period='','','',''
         self.obtener_periodos()
-        self.__set_beauty_period()
-        self.version="Informe 0.1.6"
+        self.__set_names_period()
+        self.version="Informe 0.1.7"
         self.template_header="../Latex/Contenido/Header.tex.j2"
         self.output_header="../Latex/Contenido/Header.tex"
 
-    def __set_beauty_period(self):
+        self._save_path='../Latex/Contenido/'
+        self._tables_dir = Path(self._save_path) / "tables"
+        self._tables_dir.mkdir(parents=True, exist_ok=True)
+        self._content_file = self._tables_dir / ".."/"Content.tex"
+
+    def __set_names_period(self):
         if self.__ciclo in self._CICLOS_I:
             sufijo = "-I"
+            self._ciclo=1
+            self._months_period = f"ABRIL {self._anio} - AGOSTO {self._anio}"
         elif self.__ciclo in self._CICLOS_II:
             sufijo = "-II"
+            self._ciclo=2
+            self._months_period = f"OCTUBRE {self._anio} - FEBRERO {self._anio+1}"
         else:
             raise ValueError(f"Ciclo inválido: {self.__ciclo}")
 
-        self.__beauty_period = f"{self.__anio}{sufijo}"
+        self._roman_period = f"{self._anio}{sufijo}"
+        self._letter_period = f"{self._anio}S{self._ciclo}"
+        self._number_period = f"{self._anio}-0{self._ciclo}"
+
+
+        
     
     def obtener_periodos(self):
         keep_anio_previo=["66","16"]
@@ -40,8 +55,8 @@ class Informe():
             "16":12}
         self._periodo={
                 "actual":self.__periodo,
-                "previo":str(self.__anio)+map_ciclo_previo[str(self.__ciclo)] if self.__ciclo in keep_anio_previo else str(self.__anio-1)+str(map_ciclo_previo[str(self.__ciclo)]),
-                "base":str(self.__anio-self.__base)+str(self.__ciclo)
+                "previo":str(self._anio)+map_ciclo_previo[str(self.__ciclo)] if self.__ciclo in keep_anio_previo else str(self._anio-1)+str(map_ciclo_previo[str(self.__ciclo)]),
+                "base":str(self._anio-self.__base)+str(self.__ciclo)
                 }
 
     def text_title_case(self, text):
@@ -89,8 +104,15 @@ class Informe():
 
         rendered = template.render(
             carrera=carrera,
-            periodo=self.__beauty_period,
+            periodo=self._roman_period,
             titulo=self.__titulo
         )
         Path(self.output_header).write_text(rendered, encoding="utf-8")
 
+
+    def _clean_latex_files(self):
+        for file in self._tables_dir.glob("*.tex"):
+                file.unlink()
+
+        with open(self._content_file,"w", encoding="utf-8") as f:
+                f.write('')
