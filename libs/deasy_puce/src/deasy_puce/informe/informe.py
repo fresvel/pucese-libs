@@ -18,7 +18,7 @@ class Informe():
         self._roman_period, self._months_period, self._letter_period, self._number_period='','','',''
         self.obtener_periodos()
         self.__set_names_period()
-        self.version="Informe 0.1.7"
+        self.version="Informe 0.1.10"
         self.template_header="../Latex/Contenido/Header.tex.j2"
         self.output_header="../Latex/Contenido/Header.tex"
 

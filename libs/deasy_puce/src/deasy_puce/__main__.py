@@ -1,6 +1,7 @@
 from .informe.informe import Informe
 from .latex.tblr import LatexTblr
 from .horario.horario import Horario
+from .syllabus.syllabus import Syllabus
 
 def main():
     print("Informes Pucese!")
@@ -12,4 +13,5 @@ def main():
     horario=Horario("202661")
     print(horario.data_path)
     print(horario._semestre)
-
+    syllabus=Syllabus("202566", "r1", "r2")
+    print(syllabus.titulo)

@@ -15,3 +15,5 @@ src/deasy_puce/informe/__init__.py
 src/deasy_puce/informe/informe.py
 src/deasy_puce/latex/__init__.py
 src/deasy_puce/latex/tblr.py
+src/deasy_puce/syllabus/__init__.py
+src/deasy_puce/syllabus/syllabus.py
