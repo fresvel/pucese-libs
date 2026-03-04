@@ -1,7 +1,7 @@
 from .informe.informe import Informe
 from .latex.tblr import LatexTblr
 from .horario.horario import Horario
-from .syllabus.syllabus import Syllabus
+from .syllabus.syllabus import SyllabusSeguimiento, SyllabusControl
 
 def main():
     print("Informes Pucese!")
@@ -13,5 +13,7 @@ def main():
     horario=Horario("202661")
     print(horario.data_path)
     print(horario._semestre)
-    syllabus=Syllabus("202566", "r1", "r2")
-    print(syllabus.titulo)
+    seguimiento=SyllabusSeguimiento("202566", "E055", "r1", "r2")
+    control=SyllabusControl("202566", "E055", "r1", "r2")
+    print(seguimiento._semestre)
+    print(control._semestre)

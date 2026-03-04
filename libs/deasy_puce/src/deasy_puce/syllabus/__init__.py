@@ -1,1 +1,1 @@
-from .syllabus import Syllabus
+from .syllabus import Syllabus, SyllabusSeguimiento, SyllabusControl
