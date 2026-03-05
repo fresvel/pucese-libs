@@ -2,6 +2,7 @@ from .informe.informe import Informe
 from .latex.tblr import LatexTblr
 from .horario.horario import Horario
 from .syllabus.syllabus import SyllabusSeguimiento, SyllabusControl
+from .desercion.desercion import InformeDesercion
 
 def main():
     print("Informes Pucese!")
@@ -15,5 +16,6 @@ def main():
     print(horario._semestre)
     seguimiento=SyllabusSeguimiento("202566", "E055", "r1", "r2")
     control=SyllabusControl("202566", "E055", "r1", "r2")
+    _=InformeDesercion("202566", "E055", "r1", "r2", "r3")
     print(seguimiento._semestre)
     print(control._semestre)

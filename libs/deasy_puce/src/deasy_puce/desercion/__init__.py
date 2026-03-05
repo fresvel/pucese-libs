@@ -1,0 +1,1 @@
+from .desercion import InformeDesercion
