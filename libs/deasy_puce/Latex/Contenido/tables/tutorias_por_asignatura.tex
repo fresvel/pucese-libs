@@ -1,0 +1,18 @@
+\SetTblrTemplate{caption}{empty}
+        \begin{longtblr}[
+        caption={Numero de tutorias por docente y asignatura},
+        label={tab:tutorias_por_asignatura}, 
+        ]{ 
+        colspec={X[j,m,1] X[j,m,1] X[c,m,1]},
+        ,
+        row{1-Z} = {font=\footnotesize},
+        row{1} = {bg=colhead!40, font=\footnotesize\bfseries},
+        hlines,
+        rowhead={1},
+        vlines,
+        width=\textwidth
+        }
+        Asignatura & Docente & Numero de Tutorias \\
+        Base de Datos & Lopez Luis & 2 \\
+Redes I & Perez Ana Maria & 2 \\
+        \end{longtblr}

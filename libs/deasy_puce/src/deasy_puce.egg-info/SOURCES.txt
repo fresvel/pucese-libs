@@ -19,3 +19,5 @@ src/deasy_puce/latex/__init__.py
 src/deasy_puce/latex/tblr.py
 src/deasy_puce/syllabus/__init__.py
 src/deasy_puce/syllabus/syllabus.py
+src/deasy_puce/tutorias/__init__.py
+src/deasy_puce/tutorias/tutorias.py

@@ -21,11 +21,29 @@ class Informe():
         self.version="Informe 0.1.11"
         self.template_header="../Latex/Contenido/Header.tex.j2"
         self.output_header="../Latex/Contenido/Header.tex"
-
-        self._save_path='../Latex/Contenido/'
-        self._tables_dir = Path(self._save_path) / "tables"
+        content_dir = self._get_writable_content_dir()
+        self._save_path = str(content_dir) + "/"
+        self._tables_dir = content_dir / "tables"
         self._tables_dir.mkdir(parents=True, exist_ok=True)
-        self._content_file = self._tables_dir / ".."/"Content.tex"
+        self._content_file = content_dir / "Content.tex"
+
+    def _get_writable_content_dir(self):
+        candidates = [
+            Path("../Latex/Contenido/"),
+            Path.cwd() / "Latex" / "Contenido",
+        ]
+
+        last_error = None
+        for candidate in candidates:
+            try:
+                (candidate / "tables").mkdir(parents=True, exist_ok=True)
+                return candidate
+            except OSError as exc:
+                last_error = exc
+
+        if last_error is not None:
+            raise last_error
+        raise OSError("No se pudo inicializar un directorio de salida para los informes.")
 
     def __set_names_period(self):
         if self.__ciclo in self._CICLOS_I:
@@ -82,7 +100,7 @@ class Informe():
     def df_title_case(self, df):
         df = df.copy()
         for col in df.columns:
-            if df[col].dtype == "object":
+            if pd.api.types.is_string_dtype(df[col]) or df[col].dtype == "object":
                 df[col] = df[col].apply(self.text_title_case)
         return df
     
